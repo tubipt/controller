@@ -1,0 +1,98 @@
+{
+  "podconfigurations": [
+    {
+      "name": "dws",
+      "tag": "DWS",
+      "environments": [
+        "pp",
+        "tst"
+      ],
+      "image": "customerautomationtestsacr.azurecr.io/automationtestdwsdefinitions:",
+      "id": "2733"
+    },
+    {
+      "name": "promocc",
+      "tag": "PMC",
+      "environments": [
+        "pp",
+        "tst"
+      ],
+      "image": "customerautomationtestsacr.azurecr.io/automationtestpromoccdefinitions:",
+      "id": "fa67"
+    },
+    {
+      "name": "ecommerce",
+      "tag": "ADP",
+      "environments": [
+        "pp",
+        "tst"
+      ],
+      "image": "customerautomationtestsacr.azurecr.io/automationtestecommercedefinitions:",
+      "id": "48d9"
+    },
+    {
+      "name": "perto",
+      "tag": "PMDV",
+      "environments": [
+        "uat",
+        "pp",
+        "tst"
+      ],
+      "serviceAccountName": "perto-pod-ac",
+      "image": "customerautomationtestsacr.azurecr.io/automationtestpertodefinitions:",
+      "id": "1fe1"
+    },
+    {
+      "name": "crmprov",
+      "tag": "CDL",
+      "environments": [
+        "pp",
+        "tst"
+      ],
+      "image": "customerautomationtestsacr.azurecr.io/automationtestcrmprovdefinitions:",
+      "id": "16af"
+    },
+    {
+      "name": "cll",
+      "tag": "ATC",
+      "environments": [
+        "pp",
+        "tst"
+      ],
+      "serviceAccountName": "cll-pod-ac",
+      "image": "customerautomationtestsacr.azurecr.io/automationtestclldefinitions:",
+      "id": "5673"
+    },
+    {
+      "name": "Portal Parceiros",
+      "tag": "POR",
+      "environments": [
+        "pp",
+        "tst"
+      ],
+      "image": "customerautomationtestsacr.azurecr.io/automationtestportalparceirosdefinitions:",
+      "id": "f4b7"
+    },
+    {
+      "name": "MDM",
+      "tag": "EMCB",
+      "environments": [
+        "pp",
+        "dev"
+      ],
+      "image": "customerautomationtestsacr.azurecr.io/automationtestmdmccdefinitions:",
+      "id": "b982"
+    },
+    {
+      "name": "Client Manager",
+      "tag": "PADD",
+      "environments": [
+        "pp",
+        "dev",
+        "prd"
+      ],
+      "image": "customerautomationtestsacr.azurecr.io/automationtestclientmanagerdefinitions:",
+      "id": "94a9"
+    }
+  ]
+}

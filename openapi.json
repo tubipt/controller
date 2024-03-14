@@ -1,0 +1,315 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io" 
+  },
+  "servers": [
+    {
+      "url": "/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Projects"
+    },
+    {
+      "name": "Pods"
+    }
+  ],
+  "paths": {
+    "/projects": {
+      "get": {
+        "tags": ["Projects"],
+        "summary": "This api returns all projects and environments",
+        "operationId": "findAllProjects",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Projects"
+                }
+              }
+            }
+          },
+          "error": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/projects/:project/environments/:environment/pods": {
+      "get": {
+        "tags": ["Pods"],
+        "summary": "This api returns all pods of projects and environments",
+        "operationId": "findAllPods",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "project key",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "description": "environment key",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pods"
+                }
+              }
+            }
+          },
+          "error": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Pods"],
+        "summary": "This api will create a Pod",
+        "operationId": "createPod",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "project key",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "description": "environment key",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pods"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Create",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/projects/:project/environments/:environment/pod/:name": {
+      "delete": {
+        "tags": ["Pods"],
+        "summary": "This api will destroy a Pod",
+        "operationId": "destroyPod",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "project key",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "description": "environment key",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "name key",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/projects/:project/environments/:environment/pod/:namespace/log": {
+      "get": {
+        "tags": ["Pods"],
+        "summary": "This api will open a watch Pod",
+        "operationId": "watchPod",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "project key",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "description": "environment key",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "namespace",
+            "in": "path",
+            "description": "namespace key",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": ""
+                }
+              }
+            }
+          },
+          "error": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": ["status", "message"],
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "400"
+          },
+          "message": {
+            "type": "string",
+            "example": "The API request is invalid or improperly formed. Consequently, the API server could not understand the request."
+          }
+        }
+      },
+      "Projects": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Project"
+        }
+      },
+      "Project": {
+        "type": "object",
+        "required": ["key", "value", "environments"],
+        "properties": {
+          "key": {
+            "type": "number",
+            "example": 1
+          },
+          "value": {
+            "type": "string",
+            "example": "ATC"
+          },
+          "environments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Environment"
+            }
+          }
+        }
+      },
+      "Environment": {
+        "type": "object",
+        "required": ["key", "value"],
+        "properties": {
+          "key": {
+            "type": "number",
+            "example": 2
+          },
+          "value": {
+            "type": "string",
+            "example": "TST"
+          }
+        }
+      },
+      "Pods": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Pod"
+        }
+      },
+      "Pod": {
+        "type": "object",
+        "required": ["name", "lable", "watch"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "pod1234567s"
+          },
+          "lable": {
+            "type": "string",
+            "example": "hkash72je7sda"
+          },
+          "cores": {
+            "type": "string",
+            "example": ""
+          },
+          "memory": {
+            "type": "string",
+            "example": ""
+          },
+          "watch": {
+            "type": "string",
+            "example": "/projects/1/environments/2/pods/testpod1/log"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+# resources:
+# - repo: self
+
+trigger:
+  - main
+
+pr: none
+resources:
+  repositories:
+    - repository: GithubManagerRepo # The name used to reference this repository in the checkout step
+      type: github
+      endpoint: bitgithubsa
+      name: sonaemc-customer/automationtest-manager
+      ref: main
+    - repository: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  imageRepository: 'automationtest'
+  containerRegistry: 'customerautomationtestsacr.azurecr.io'
+  tagBuildId: '$(Build.BuildId)'
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+  - stage: Build
+    displayName: Build and push stage
+    jobs:
+      - job: Build
+        displayName: Build and push
+        pool:
+          vmImage: $(vmImageName)
+        steps:
+          - checkout: self
+          - checkout: GithubManagerRepo
+          - task: Docker@2
+            displayName: Build docker image
+            inputs:
+              containerRegistry: 'CustomerAutomationTestsAcr'
+              repository: '$(imageRepository)'
+              command: 'build'
+              Dockerfile: './automationtest-controller/Dockerfile'
+              buildContext: '$(System.DefaultWorkingDirectory)'
+              tags: |
+                $(tagBuildId)
+                latest
+              #arguments: '--build-arg NPM_TOKEN=$(npmToken)'
+            continueOnError: true
+          - task: Docker@2
+            displayName: Push docker image to ACR
+            inputs:
+              containerRegistry: 'CustomerAutomationTestsAcr'
+              repository: '$(imageRepository)'
+              command: 'push'
+              tags: |
+                $(tagBuildId)
+                latest
+        # - task: PublishBuildArtifacts@1
+        #   displayName: Save deployment file to artifacts
+        #   inputs:
+        #     PathtoPublish: '$(System.DefaultWorkingDirectory)'
+        #     ArtifactName: 'AutomationTestDeployment'
+        #     publishLocation: 'Container'

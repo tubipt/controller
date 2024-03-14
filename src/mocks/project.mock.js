@@ -1,0 +1,52 @@
+class ProjectMock {
+  model() {
+    return [
+      {
+        key: 1,
+        value: 'DWS',
+        environments: [
+          {
+            key: 1,
+            value: 'TST',
+          },
+          {
+            key: 2,
+            value: 'PP',
+          },
+        ],
+      },
+      {
+        key: 2,
+        value: 'PROMOCC',
+        environments: [
+          {
+            key: 1,
+            value: 'TST',
+          },
+          {
+            key: 2,
+            value: 'PP',
+          },
+        ],
+      },
+      {
+        key: 3,
+        value: 'ATC',
+        environments: [
+          {
+            key: 1,
+            value: 'TST',
+          },
+          {
+            key: 2,
+            value: 'PP',
+          },
+        ],
+      },
+    ]
+  }
+}
+
+module.exports = {
+  ProjectMock,
+}

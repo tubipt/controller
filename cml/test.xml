@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description/>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>FC-CORS</Name>
+            </Step>
+            <Step>
+                <Name>FC-ApiKeyAndOAuthHandler</Name>
+            </Step>
+            <Step>
+                <Name>AM-Proxy-PreFlow-Clean</Name>
+            </Step>
+            <Step>
+                <Name>FC-Clean-Request</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <Flows>
+        <Flow name="POST /accounts/v1/cards/card_id/identity_document_validations">
+            <Description>{
+                            "targetSystem":"loyaltyManagerOrch",
+                            "targetService":"/api/customers/cards/{card_id}/identity/validations",
+                            "targetOperation":":",
+                            "verb":"POST",
+                            "resource":"/accounts/v1/cards/*/identity_document_validations"
+                        }
+            </Description>
+            <Request>
+                <Step>
+                    <Name>EV-Proxy-Req</Name>
+                </Step>
+                <Step>
+                    <Name>AM-Proxy-Req</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="GET /accounts/v1/cards/card_id/identity_document_validations">
+            <Description>{
+                            "targetSystem":"loyaltyManagerOrch",
+                            "targetService":"/api/customers/cards/{card_id}/identity/validations",
+                            "targetOperation":":",
+                            "verb":"GET",
+                            "resource":"/accounts/v1/cards/*/identity_document_validations"
+                        }
+            </Description>
+            <Request>
+                <Step>
+                    <Name>EV-Proxy-Req</Name>
+                </Step>
+                <Step>
+                    <Name>AM-Proxy-Req</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "") and (request.verb = "GET")</Condition>
+        </Flow>
+    </Flows>
+    <HTTPProxyConnection>
+        <BasePath>/accounts/v1/cards/*/identity_document_validations</BasePath>
+        <Properties/>
+        <VirtualHost>loyalty</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+        <Condition>request.verb = "POST" || request.verb = "GET"</Condition>
+    </RouteRule>
+    <DefaultFaultRule name="default-fault">
+        <AlwaysEnforce>true</AlwaysEnforce>
+        <Step>
+            <Name>FC-ErrorHandlingCustomer</Name>
+        </Step>
+        <Step>
+            <Name>FC-CORS</Name>
+        </Step>
+    </DefaultFaultRule>
+    <FaultRules>
+        <FaultRule name="RoutingFailure">
+            <Step>
+                <Name>AM-Proxy-MethodNotAllowed</Name>
+            </Step>
+            <Condition>fault.name = "RouteFailed"</Condition>
+        </FaultRule>
+        <FaultRule name="AuthenticationFailure">
+            <Step>
+                <Name>AM-Proxy-Authentication-Error</Name>
+            </Step>
+            <Condition>fault.name = "invalid_access_token" or fault.name = "InvalidApiKey" or fault.name = "InvalidAccessToken" or fault.name = "InvalidApiKeyForGivenResource"</Condition>
+        </FaultRule>
+    </FaultRules>
+</ProxyEndpoint>

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-get-pods
+  namespace: automationtest-ns
+  labels:
+    purpose: get-all-pods
+spec:
+  containers:
+    - name: container-get-pods
+      image: python:latest
+      command: ['tail']
+      args: ['-f', '/dev/null']
+  restartPolicy: OnFailure
+  serviceAccountName: automationtest-controllersvc

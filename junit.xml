@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<testsuites name="jest tests" tests="8" failures="0" errors="0" time="7.65">
+  <testsuite name="Verify ProjectService," errors="0" failures="0" skipped="0" timestamp="2022-11-25T12:51:27" time="4.553" tests="2">
+    <testcase classname="Verify ProjectService, when findAll is used, must return a list of all projects." name="Verify ProjectService, when findAll is used, must return a list of all projects." time="0.004">
+    </testcase>
+    <testcase classname="Verify ProjectService, when findAll is used, must return error." name="Verify ProjectService, when findAll is used, must return error." time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="Verify PodService," errors="0" failures="0" skipped="0" timestamp="2022-11-25T12:51:27" time="4.595" tests="6">
+    <testcase classname="Verify PodService, when findAll is used, must return a list of all pods of a project and environment." name="Verify PodService, when findAll is used, must return a list of all pods of a project and environment." time="0.004">
+    </testcase>
+    <testcase classname="Verify PodService, when findAll is used, must return error." name="Verify PodService, when findAll is used, must return error." time="0.002">
+    </testcase>
+    <testcase classname="Verify PodService, when create is used, must return pods of a project and environment." name="Verify PodService, when create is used, must return pods of a project and environment." time="0.002">
+=======
+<testsuites name="jest tests" tests="8" failures="1" errors="0" time="1.78">
+  <testsuite name="Verify PodService," errors="0" failures="0" skipped="0" timestamp="2022-11-24T23:17:09" time="0.92" tests="6">
+    <testcase classname="Verify PodService, when findAll is used, must return a list of all pods of a project and environment." name="Verify PodService, when findAll is used, must return a list of all pods of a project and environment." time="0.002">
+    </testcase>
+    <testcase classname="Verify PodService, when findAll is used, must return error." name="Verify PodService, when findAll is used, must return error." time="0.003">
+    </testcase>
+    <testcase classname="Verify PodService, when create is used, must return pods of a project and environment." name="Verify PodService, when create is used, must return pods of a project and environment." time="0.001">
+>>>>>>> 6a597af138cc02fc15731f37706bc07612378ed4
+    </testcase>
+    <testcase classname="Verify PodService, when create is used, must return error." name="Verify PodService, when create is used, must return error." time="0.001">
+    </testcase>
+    <testcase classname="Verify PodService, when destroy is used, must destroy pod of a project and environment." name="Verify PodService, when destroy is used, must destroy pod of a project and environment." time="0.001">
+    </testcase>
+    <testcase classname="Verify PodService, when destroy is used, must return error." name="Verify PodService, when destroy is used, must return error." time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Verify ProjectService," errors="0" failures="1" skipped="0" timestamp="2022-11-24T23:17:09" time="0.946" tests="2">
+    <testcase classname="Verify ProjectService, when findAll is used, must return a list of all projects." name="Verify ProjectService, when findAll is used, must return a list of all projects." time="0.001">
+      <failure>TypeError: ProjectRepository.getProjects is not a function
+    at ProjectService.getProjects [as findAll] (C:\Users\elioa\Desktop\automationtest-controller-main\src\services\project.service.js:10:34)
+    at Object.findAll (C:\Users\elioa\Desktop\automationtest-controller-main\src\services\__test__\project.service.test.js:12:49)
+    at Promise.then.completed (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-circus\build\utils.js:289:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-circus\build\utils.js:222:10)
+    at _callCircusTest (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-circus\build\run.js:248:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-circus\build\run.js:184:3)
+    at _runTestsForDescribeBlock (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-circus\build\run.js:86:9)
+    at _runTestsForDescribeBlock (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-circus\build\run.js:81:9)
+    at _runTestsForDescribeBlock (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-circus\build\run.js:81:9)
+    at run (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-circus\build\run.js:26:3)
+    at runAndTransformResultsToJestFormat (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:120:21)
+    at jestAdapter (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\Users\elioa\Desktop\automationtest-controller-main\node_modules\jest-runner\build\testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="Verify ProjectService, when findAll is used, must return error." name="Verify ProjectService, when findAll is used, must return error." time="0.001">
+    </testcase>
+  </testsuite>
+</testsuites>
